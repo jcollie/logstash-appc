@@ -1,3 +1,4 @@
+version=0.2
 LOGSTASH_VERSION=1.4.2
 root=`mktemp -d`
 nspawn="systemd-nspawn -D ${root}/rootfs"
@@ -13,9 +14,7 @@ sudo ${nspawn} yum -y clean all
 #sudo ${nspawn} useradd -u 1068 -g 1068 -d /logstash -s /sbin/nologin -M logstash
 sudo ${nspawn} mkdir /logstash /logstash/bin /etc/logstash
 
-sudo cp configure.py ${root}/rootfs/logstash/bin/configure.py
-sudo cp start.sh ${root}/rootfs/logstash/bin/start.sh
-sudo chmod a+x ${root}/rootfs/logstash/bin/start.sh
+sudo cp run.py ${root}/rootfs/logstash/bin/run.py
 
 sudo ${nspawn} wget https://download.elasticsearch.org/logstash/logstash/logstash-${LOGSTASH_VERSION}.tar.gz
 sudo ${nspawn} wget https://download.elasticsearch.org/logstash/logstash/logstash-contrib-${LOGSTASH_VERSION}.tar.gz
@@ -26,6 +25,9 @@ sudo ${nspawn} rm logstash-${LOGSTASH_VERSION}.tar.gz logstash-contrib-${LOGSTAS
 
 cp manifest ${root}/manifest
 
-sudo actool build --overwrite ${root} /tmp/logstash.aci
+sudo actool build --overwrite ${root} /tmp/logstash-${version}.aci
 sudo du -sh ${root}/rootfs
 sudo rm -rf ${root}
+ls -lh /tmp/logstash-${version}.aci
+gpg2 --detach-sign --armor --output /tmp/logstash-${version}.aci.asc /tmp/logstash-${version}.aci
+ls -lh /tmp/logstash-${version}.aci.asc
