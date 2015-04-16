@@ -1,0 +1,19 @@
+{
+    "acKind": "ImageManifest",
+    "acVersion": "0.5.1",
+    "name": "logstash",
+    "labels": [
+	{"name": "os",
+	 "value": "linux"},
+	{"name": "arch",
+	 "value": "amd64"}],
+    "app": {
+	"exec": [ "/usr/bin/python", "/logstash/bin/run.py" ],
+	"mountPoints": [
+	    {"name": "config",
+	     "path": "/etc/logstash",
+	     "readOnly": true}],
+	"user": "0",
+	"group": "0"
+    }
+}
