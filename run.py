@@ -26,9 +26,9 @@ sys.stderr.write(config)
 
 sys.stderr.write('=' * 75 + '\n')
 
-config_file, config_filename = tempfile.mkstemp()
-config_file.write(config)
-config_file.close()
+config_fd, config_filename = tempfile.mkstemp()
+os.write(config_fd, config)
+os.close(config_fd)
 
 sys.stderr.write('=' * 75 + '\n')
 
