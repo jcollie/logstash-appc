@@ -1,0 +1,3 @@
+[submodule "sig-cloud-instance-images"]
+	path = sig-cloud-instance-images
+	url = https://github.com/CentOS/sig-cloud-instance-images.git
