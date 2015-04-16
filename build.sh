@@ -2,9 +2,8 @@ LOGSTASH_VERSION=1.4.2
 root=`mktemp -d`
 nspawn="systemd-nspawn -D ${root}/rootfs"
 
-git clone --branch CentOS-7 --single-branch --depth 1 https://github.com/CentOS/sig-cloud-instance-images.git ${root}/sig-cloud-instance-images
 sudo mkdir ${root}/rootfs
-sudo tar --extract --directory=${root}/rootfs --file ${root}/sig-cloud-instance-images/docker/centos-*.tar.xz
+sudo tar --extract --directory=${root}/rootfs --file sig-cloud-instance-images/docker/centos-*.tar.xz
 
 sudo ${nspawn} yum -y update
 sudo ${nspawn} yum -y install java-1.7.0-openjdk-headless tar python-jinja2 wget
@@ -26,8 +25,6 @@ sudo ${nspawn} rm logstash-${LOGSTASH_VERSION}.tar.gz logstash-contrib-${LOGSTAS
 #sudo ${nspawn} chown -R logstash:logstash /logstash /etc/logstash
 
 cp manifest ${root}/manifest
-
-rm -rf ${root}/sig-cloud-instance-images
 
 sudo actool build --overwrite ${root} /tmp/logstash.aci
 sudo du -sh ${root}/rootfs
