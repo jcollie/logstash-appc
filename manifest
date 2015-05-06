@@ -1,7 +1,7 @@
 {
     "acKind": "ImageManifest",
     "acVersion": "0.5.1",
-    "name": "logstash",
+    "name": "dmacc.net/logstash",
     "labels": [
 	{"name": "os",
 	 "value": "linux"},

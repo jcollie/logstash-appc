@@ -11,7 +11,7 @@ sys.stderr.write('=' * 75 + '\n')
 keys = os.environ.keys()
 keys.sort()
 for key in keys:
-    sys.stderr.write('{}: {}\n'.format(key, os.environ[key]))
+    sys.stderr.write('{}: {}\n'.format(key, `os.environ[key]`))
 
 sys.stderr.write('=' * 75 + '\n')
 

@@ -1,4 +1,4 @@
-version=0.2
+version=0.3
 LOGSTASH_VERSION=1.4.2
 root=`mktemp -d`
 nspawn="systemd-nspawn -D ${root}/rootfs"
@@ -29,5 +29,5 @@ sudo actool build --overwrite ${root} /tmp/logstash-${version}.aci
 sudo du -sh ${root}/rootfs
 sudo rm -rf ${root}
 ls -lh /tmp/logstash-${version}.aci
-gpg2 --detach-sign --armor --output /tmp/logstash-${version}.aci.asc /tmp/logstash-${version}.aci
+gpg2 --local-user 3F0189D9 --detach-sign --armor --output /tmp/logstash-${version}.aci.asc /tmp/logstash-${version}.aci
 ls -lh /tmp/logstash-${version}.aci.asc
